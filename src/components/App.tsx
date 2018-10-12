@@ -10,10 +10,12 @@ interface IProps {
 
 class App extends React.Component <IProps, IAppState> {
   state ={
-    tasks: []
+    tasks: [
+      {title: 'Hit the gym', completed: false}
+    ]
   }
 
-  addTask = (task) => {
+  addTask = (task:ITaskItem) => {
     const {tasks} = this.state;
     const updatedTasks = [...tasks]
     updatedTasks.push(task)
@@ -23,6 +25,7 @@ class App extends React.Component <IProps, IAppState> {
   render() {
     const { creator, year } = this.props
     const { tasks } = this.state
+    console.log(tasks)
     const today = moment().format('dddd, Do MMM');
     return (
       <div className="App">

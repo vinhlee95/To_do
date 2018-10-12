@@ -7,7 +7,7 @@ interface ITaskItem {
 
 // interface of props of a task
 interface ITaskItemProps {
-  addTask: (task) => void
+  addTask: (task:ITaskItem) => void
 }
 
 // interface of app state

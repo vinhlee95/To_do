@@ -22,6 +22,9 @@
   "files": [
     "interfaces.tsx"
   ],
+  "include": [
+    "./src/**/*",
+  ],
   "exclude": [
     "node_modules",
     "build",
