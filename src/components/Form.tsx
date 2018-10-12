@@ -1,26 +1,40 @@
 import * as React from 'react'
 
-export default class Form extends React.Component <{addTask}, {singleTask: string}> {
+export default class Form extends React.Component <ITaskItemProps, ITaskItemState> {
   state = {
-    singleTask: ''
+    task: {
+      title: '', completed: false
+    }
   }
 
   onChange = (e:React.FormEvent<HTMLInputElement>):void => {
-    this.setState({ singleTask: e.currentTarget.value })
+    this.setState({
+      task: {
+        ...this.state.task,
+        title: e.currentTarget.value
+      }
+    })
   }
 
-  submit = (e):void => {
+  submit = (e) => {
     e.preventDefault()
-    const {singleTask} = this.state
-    this.props.addTask(singleTask)
-    this.setState({ singleTask: '' })
+    const {task} = this.state
+    this.props.addTask(task)
+    // clear input
+    this.setState({
+      task: {
+        ...this.state.task,
+        title: ''
+      }
+    })
   }
 
   render() {
+    const { task: {title} } = this.state
     return (
       <form onSubmit={this.submit}>
         <input 
-          value={this.state.singleTask}
+          value={title}
           placeholder='Add a task'
           type='text'
           onChange={this.onChange}

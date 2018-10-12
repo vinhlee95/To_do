@@ -1,43 +1,38 @@
+import * as moment from 'moment'
 import * as React from 'react';
 import Form from './Form';
+import TaskItem from './TaskItem';
 
-interface Props {
+interface IProps {
   creator: string;
   year: number;
 }
 
-interface State {
-  submit: boolean,
-  tasks: string[]
-}
-
-class App extends React.Component <Props, State> {
+class App extends React.Component <IProps, IAppState> {
   state ={
-    submit: false,
     tasks: []
   }
 
-  addTask = (task:string):void => {
-    const updatedTasks: string[] = [...this.state.tasks]
+  addTask = (task) => {
+    const {tasks} = this.state;
+    const updatedTasks = [...tasks]
     updatedTasks.push(task)
-    this.setState({ tasks: updatedTasks })
+    this.setState({ tasks: updatedTasks})
   }
 
   render() {
     const { creator, year } = this.props
     const { tasks } = this.state
+    const today = moment().format('dddd, Do MMM');
     return (
       <div className="App">
         <h1>My Day</h1>
-        <ul>
-          {tasks && tasks.map((task:string, id:number) => {
+        <h2>{today}</h2>
+          {tasks && tasks.map((task:ITaskItem, id:number) => {
             return(
-              <li key={id}>
-                {task}
-              </li>
+              <TaskItem key={id} title={task.title} completed={task.completed}  />
             )
           })}
-        </ul>        
         <Form
           addTask={this.addTask}
         />
