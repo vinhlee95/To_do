@@ -19,9 +19,9 @@ export default class Form extends React.Component <{addTask}, {singleTask: strin
   render() {
     return (
       <form onSubmit={this.submit}>
-        <label>Add your task</label>
         <input 
           value={this.state.singleTask}
+          placeholder='Add a task'
           type='text'
           onChange={this.onChange}
         />

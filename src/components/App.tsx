@@ -24,11 +24,20 @@ class App extends React.Component <Props, State> {
   }
 
   render() {
-    console.log(this.state.tasks)
     const { creator, year } = this.props
+    const { tasks } = this.state
     return (
       <div className="App">
-        <h1>TypeScript React Starter</h1>
+        <h1>My Day</h1>
+        <ul>
+          {tasks && tasks.map((task:string, id:number) => {
+            return(
+              <li key={id}>
+                {task}
+              </li>
+            )
+          })}
+        </ul>        
         <Form
           addTask={this.addTask}
         />
